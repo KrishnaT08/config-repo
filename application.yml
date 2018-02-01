@@ -1,6 +1,6 @@
 # Property used on app startup to check the config server status
 configserver:
-    name: configserver config server
+    name: configserver
     status: Connected to the configserver git config server!
 
 spring:
@@ -9,13 +9,13 @@ spring:
             retry: 
                 enabled: true
 
-cfms:
-    ribbon:
-        ConnectTimeout: 1000
-        ReadTimeout: 3000
-        MaxAutoRetries: 0
-        MaxAutoRetriesNextServer: 4
-        OkToRetryOnAllOperations: true
+discovery:
+    registry:
+        user: admin
+        password: admin
+        host: localhost
+        port: 8761
+
 eureka:
     server:
         # When the eureka server starts up it tries to fetch all the registry information from 
@@ -31,7 +31,6 @@ eureka:
         # off for collocated Services in a private data center.
         enableSelfPreservation: false
     instance:
-        #instanceId: cfms:${spring.application.instance_id:${random.value}}
         prefer-ip-address: false
         lease-renewal-interval-in-seconds: 5
         lease-expiration-duration-in-seconds: 10
@@ -50,6 +49,7 @@ eureka:
         registry-fetch-interval-seconds: 10
         serviceUrl:
             defaultZone: http://${discovery.registry.user:admin}:${discovery.registry.password:admin}@${discovery.registry.host:localhost}:${discovery.registry.port}/regs/eureka/
+
 management:
     context-path: /management
     security:
