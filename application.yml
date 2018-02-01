@@ -48,7 +48,7 @@ eureka:
         instance-info-replication-interval-seconds: 10
         registry-fetch-interval-seconds: 10
         serviceUrl:
-            defaultZone: https://myeurekaserver.cfapps.io/eureka/
+            defaultZone: http://myeurekaserver.cfapps.io/regs/eureka/
 
 management:
     context-path: /management
