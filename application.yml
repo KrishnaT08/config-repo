@@ -48,7 +48,7 @@ eureka:
         instance-info-replication-interval-seconds: 10
         registry-fetch-interval-seconds: 10
         serviceUrl:
-            defaultZone: http://${discovery.registry.user:admin}:${discovery.registry.password:admin}@${discovery.registry.host:localhost}:${discovery.registry.port}/regs/eureka/
+            defaultZone: https://myeurekaserver.cfapps.io/eureka/
 
 management:
     context-path: /management
