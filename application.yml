@@ -1,2 +1,64 @@
-mongodb:
-    testmessage: hello
+# Property used on app startup to check the config server status
+configserver:
+    name: configserver config server
+    status: Connected to the configserver git config server!
+
+spring:
+    cloud:
+        loadbalancer:
+            retry: 
+                enabled: true
+
+cfms:
+    ribbon:
+        ConnectTimeout: 1000
+        ReadTimeout: 3000
+        MaxAutoRetries: 0
+        MaxAutoRetriesNextServer: 4
+        OkToRetryOnAllOperations: true
+eureka:
+    server:
+        # When the eureka server starts up it tries to fetch all the registry information from 
+        # the peer eureka nodes. This operation is retried 5 times for each peer (configurable 
+        # by eureka.server.numberRegistrySyncRetries). If for some reason this operation fails, 
+        # the server does not allow clients to get the registry information for 5min 
+        # (configurable by eureka.server.getWaitTimeInMsWhenSyncEmpty)
+        waitTimeInMsWhenSyncEmpty: 0
+        # Eureka Server has a protection feature: in case a certain number of Instances fail to 
+        # send heartbeats in a determined time interval, the Server will not remove them from 
+        # the registry. It considers that a network partition occurred and will wait for these 
+        # Instances to come back. This feature is very useful in Cloud deploys and can be turned 
+        # off for collocated Services in a private data center.
+        enableSelfPreservation: false
+    instance:
+        #instanceId: cfms:${spring.application.instance_id:${random.value}}
+        prefer-ip-address: false
+        lease-renewal-interval-in-seconds: 5
+        lease-expiration-duration-in-seconds: 10
+        status-page-url-path: ${management.context-path}/info
+        health-check-url-path: ${management.context-path}/health
+        metadata-map:
+            profile: ${spring.profiles.active}
+            version: ${info.project.version}
+    client:
+        enabled: true
+        healthcheck:
+            enabled: true
+        #fetch-registry: true
+        #register-with-eureka: true
+        instance-info-replication-interval-seconds: 10
+        registry-fetch-interval-seconds: 10
+        serviceUrl:
+            defaultZone: http://${discovery.registry.user:admin}:${discovery.registry.password:admin}@${discovery.registry.host:localhost}:${discovery.registry.port}/regs/eureka/
+management:
+    context-path: /management
+    security:
+        enabled: false
+    health:
+        jms:
+            enabled: false
+        config:
+            enabled: false
+endpoints:
+    health:
+        sensitive: false
