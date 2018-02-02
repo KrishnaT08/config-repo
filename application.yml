@@ -8,7 +8,8 @@ spring:
         loadbalancer:
             retry: 
                 enabled: true
-
+        services:
+            registrationMethod: route
 discovery:
     registry:
         user: admin
