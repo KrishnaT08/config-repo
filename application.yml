@@ -37,6 +37,7 @@ eureka:
         lease-expiration-duration-in-seconds: 10
         status-page-url-path: ${management.context-path}/info
         health-check-url-path: ${management.context-path}/health
+        hostname: ${vcap.application.uris[0]}
         metadata-map:
             profile: ${spring.profiles.active}
             version: ${info.project.version}
