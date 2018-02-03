@@ -1,0 +1,14 @@
+eureka:
+    instance:
+        appname: hystrixdashboard
+        hostname: ${vcap.application.uris[0]}
+        nonSecurePort: 80        
+    client:
+        fetch-registry: true
+        register-with-eureka: true
+       
+        
+turbine:
+    appConfig: rate,rateclient
+    clusterNameExpression: "'default'"
+    instanceUrlSuffix: /management/hystrix.stream

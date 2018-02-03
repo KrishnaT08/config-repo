@@ -1,0 +1,9 @@
+# Property used on app startup to check the config server status
+configserver:
+    name: configserver
+    status: Connected to the configserver cloud-dev git config server!
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://myeurekaserver-dev.cfapps.io/regs/eureka/
