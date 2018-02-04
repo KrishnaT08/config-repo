@@ -1,0 +1,10 @@
+mongodb:
+    testmessage: hello
+    mongoNodes:
+        - host: 35.203.181.13
+          port: 27017
+                   
+    mongoNodeCredentials:
+        - username: admin
+          password: password
+          authSource: admin
